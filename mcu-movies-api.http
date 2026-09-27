@@ -1,6 +1,19 @@
 @MoviesApi_HostAddress = http://localhost:5092
 
 ### Obtener todas las películas
-GET {{MoviesApi_HostAddress}}/Weatherforecast
+GET {{MoviesApi_HostAddress}}/movies
 Accept: application/json
 
+### Crear una película
+POST {{MoviesApi_HostAddress}}/movies
+Content-Type: application/json
+
+{
+  "title": "Guardians of the Galaxy",
+  "releaseYear": 2014,
+  "duration": 121
+}
+
+### Comprobar que se ha añadido
+GET {{MoviesApi_HostAddress}}/movies
+Accept: application/json
