@@ -1,3 +1,4 @@
+using MoviesApi.Contracts;
 using MoviesApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,5 +31,16 @@ var movies = new List<Movie>
 
 app.MapGet("/movies", () => Results.Ok(movies))
     .WithName("GetMovies");
+
+app.MapPost("/movies", (CreateMovieRequest request) =>
+{
+    var nextId = movies.Count == 0 ? 1 : movies.Max(movie => movie.Id) + 1;
+    var movie = new Movie(nextId, request.Title, request.ReleaseYear, request.Duration);
+
+    movies.Add(movie);
+
+    return Results.Created($"/movies/{movie.Id}", movie);
+})
+.WithName("CreateMovie");
 
 app.Run();
