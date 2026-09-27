@@ -35,7 +35,7 @@ app.MapGet("/movies", () => Results.Ok(movies))
 app.MapPost("/movies", (CreateMovieRequest request) =>
 {
     var nextId = movies.Count == 0 ? 1 : movies.Max(movie => movie.Id) + 1;
-    var movie = new Movie(nextId, request.Title, request.ReleaseYear);
+    var movie = new Movie(nextId, request.Title, request.ReleaseYear, request.Duration);
 
     movies.Add(movie);
 
